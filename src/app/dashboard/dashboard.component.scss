@@ -1,0 +1,119 @@
+/**
+ * Styles for the DashboardComponent.
+ * This file defines the layout, typography, and styling for the dashboard and its elements.
+ */
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 1rem 5rem 1rem;
+  background-color: #f8f9fa;
+
+  /**
+     * Styles for the dashboard title.
+     * Includes an icon and text, centered horizontally.
+     */
+  .dashboard-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    gap: 0.6rem;
+    margin-bottom: 3rem;
+
+    .icon {
+      font-size: 2.5rem;
+      color: #1976d2;
+    }
+  }
+
+  /**
+     * Styles for the grid layout of books.
+     * Uses a responsive grid with auto-fit columns.
+     */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  /**
+     * Styles for individual book cards.
+     * Includes hover effects, padding, and shadow for a clean design.
+     */
+  .book-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .book-progress {
+      margin-top: 0.5rem;
+
+      small {
+        display: block;
+        margin-bottom: 0.25rem;
+        font-size: 0.8rem;
+        color: #555;
+      }
+
+      mat-progress-bar {
+        height: 6px;
+        border-radius: 4px;
+      }
+    }
+
+    /**
+       * Styles for the book title inside the card.
+       */
+    mat-card-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    /**
+       * Styles for the book category (subtitle) inside the card.
+       */
+    mat-card-subtitle {
+      font-size: 0.95rem;
+      color: #757575;
+    }
+
+    /**
+       * Styles for the card content, including the description.
+       */
+    mat-card-content {
+      font-size: 0.95rem;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /**
+       * Styles for the card actions section.
+       * Aligns the button to the right and applies custom button styles.
+       */
+    mat-card-actions {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        border-radius: 999px; // Pill-shaped button
+        font-weight: 500;
+        font-size: 0.9rem;
+        padding: 0.4rem 1.2rem;
+        min-width: 110px;
+      }
+    }
+  }
+}

@@ -1,0 +1,136 @@
+<!-- 
+  Author: Tarun Kumar
+  Date: April 8, 2025
+
+  Description: SignupComponent Template
+  This template provides a user interface for user registration.
+  It includes fields for email, username, password, and confirm password, along with validation and error messages.
+-->
+
+<div class="signup-container">
+  <!-- Title for the signup form -->
+  <h2>Sign Up</h2>
+
+  <!-- Signup form -->
+  <form #signupForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- Email input field -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        [(ngModel)]="email"
+        name="email"
+        type="email"
+        required
+        email
+        #emailField="ngModel"
+        placeholder="Enter your email"
+      />
+      <mat-error *ngIf="emailField.errors?.['required'] && emailField.touched">
+        Email is required.
+      </mat-error>
+      <mat-error *ngIf="emailField.errors?.['email'] && emailField.touched">
+        Please enter a valid email address.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Username input field -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        [(ngModel)]="username"
+        name="username"
+        type="text"
+        required
+        minlength="3"
+        pattern="^[a-zA-Z0-9_]+$"
+        #usernameField="ngModel"
+        placeholder="Choose a username"
+      />
+      <mat-error *ngIf="usernameField.errors?.['required'] && usernameField.touched">
+        Username is required.
+      </mat-error>
+      <mat-error *ngIf="usernameField.errors?.['minlength'] && usernameField.touched">
+        Username must be at least 3 characters.
+      </mat-error>
+      <mat-error *ngIf="usernameField.errors?.['pattern'] && usernameField.touched">
+        letters, numbers, and underscores only.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Password input field -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        [(ngModel)]="password"
+        name="password"
+        required
+        pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$"
+        #passwordField="ngModel"
+        [ngModelOptions]="{ standalone: true }"
+        minlength="8"
+        placeholder="Enter your password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Toggle password visibility'"
+      >
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="passwordField.errors?.['required'] && passwordField.touched">
+        Password is required.
+      </mat-error>
+      <mat-error *ngIf="passwordField.errors?.['pattern'] && passwordField.touched">
+        Must be 8+ chars, 1 uppercase, 1 number & 1 special char.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Confirm Password input field -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        [type]="hideConfirmPassword ? 'password' : 'text'"
+        [(ngModel)]="confirmPassword"
+        name="confirmPassword"
+        placeholder="Confirm your password"
+        #confirmPasswordField="ngModel"
+        [ngModelOptions]="{ standalone: true }"
+        required
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="hideConfirmPassword = !hideConfirmPassword"
+        [attr.aria-label]="'Toggle confirm password visibility'"
+      >
+        <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-error *ngIf="confirmPasswordField.errors?.['required'] && confirmPasswordField.touched">
+        Confirm Password is required.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Mismatched Password Error -->
+    <div *ngIf="password !== confirmPassword && signupForm.submitted" class="error">
+      Passwords do not match.
+    </div>
+
+    <!-- Signup Button -->
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      [disabled]="signupForm.invalid"
+    >
+      Sign Up
+    </button>
+  </form>
+</div>

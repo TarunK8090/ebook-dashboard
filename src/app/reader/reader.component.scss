@@ -1,0 +1,74 @@
+/**
+ * Styles for the ReaderComponent.
+ * This file defines the layout and styling for the book reader interface, including the content lines and navigation buttons.
+ */
+
+.reader-container {
+  /**
+   * Centers the reader content and sets a maximum width for better readability.
+   */
+  padding: 1rem;
+  max-width: 800px;
+  margin: auto;
+
+  /**
+   * Styles for the book title.
+   * Centers the title and adds spacing below it.
+   */
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  /**
+   * Styles for each line of the book content.
+   * Adds spacing, padding, and hover effects for better interactivity.
+   */
+  div {
+    margin: 0.25rem 0;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    /**
+     * Styles for the currently active line.
+     * Highlights the line with a background color and bold text.
+     */
+    &.active-line {
+      background-color: #e3f2fd;
+      font-weight: bold;
+    }
+
+    /**
+     * Hover effect for non-active lines.
+     * Changes the background color on hover for better interactivity.
+     */
+    &:hover:not(.active-line) {
+      background-color: #f5f5f5;
+    }
+  }
+
+  /**
+   * Styles for the navigation button row.
+   * Centers the buttons, adds spacing between them, and ensures responsiveness.
+   */
+  .button-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .progress-text {
+    text-align: center;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    color: #666;
+  }
+  
+  mat-progress-bar {
+    margin-bottom: 1.25rem;
+  }
+}

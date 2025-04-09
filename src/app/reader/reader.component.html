@@ -1,0 +1,67 @@
+<!-- 
+  Author: Tarun Kumar
+  Date: April 8, 2025
+
+  Description: ReaderComponent Template
+  This template provides a user interface for reading a book line by line.
+  It includes the book title, progress tracking, navigation buttons, and the ability to reset progress.
+-->
+
+<div class="reader-container" *ngIf="book">
+  <!-- Book Title -->
+  <h2>{{ book.title }}</h2>
+
+  <!-- Line Progress Text -->
+  <div class="progress-text">
+    Line {{ currentLine + 1 }} of {{ book.content.length }}
+    ({{ getProgressPercent() }}%)
+  </div>
+
+  <!-- Progress Bar -->
+  <mat-progress-bar
+    mode="determinate"
+    [value]="getProgressPercent()"
+  ></mat-progress-bar>
+
+  <!-- Book Content -->
+  <div
+    *ngFor="let line of book.content; let i = index"
+    [class.active-line]="i === currentLine"
+    (click)="saveProgressAt(i)"
+  >
+    {{ line }}
+  </div>
+
+  <!-- Navigation Buttons -->
+  <div class="button-row">
+    <!-- Previous Line Button -->
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="previousLine()"
+      [disabled]="currentLine === 0"
+    >
+      Previous Line
+    </button>
+
+    <!-- Next Line Button -->
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="nextLine()"
+      [disabled]="currentLine >= book.content.length - 1"
+    >
+      Next Line
+    </button>
+
+    <!-- Reset Progress Button -->
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="resetProgress()"
+      [disabled]="currentLine === 0"
+    >
+      Reset
+    </button>
+  </div>
+</div>

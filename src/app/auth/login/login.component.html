@@ -1,0 +1,82 @@
+<!-- 
+  Author: Tarun Kumar
+  Date: April 8, 2025
+
+  Description: LoginComponent Template
+  This template provides a user interface for user login.
+  It includes fields for email and password, along with validation, error messages, and a submit button.
+-->
+
+<div class="login-container">
+  <!-- Title for the login form -->
+  <h2>Login</h2>
+
+  <!-- Login form -->
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- Email input field -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        [(ngModel)]="email"
+        name="email"
+        type="email"
+        required
+        email
+        #emailField="ngModel"
+        placeholder="Enter your email"
+      />
+      <mat-error *ngIf="emailField.invalid && emailField.touched">
+        Please enter a valid email address.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Password input field -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        [type]="hidePassword ? 'password' : 'text'"
+        [(ngModel)]="password"
+        name="password"
+        required
+        minlength="8"
+        #passwordField="ngModel"
+        placeholder="Enter your password"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        type="button"
+        (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Toggle password visibility'"
+      >
+        <mat-icon>{{ hidePassword ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <mat-error *ngIf="passwordField.invalid && passwordField.touched">
+        Password must be at least 8 characters.
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Error message (from backend) -->
+    <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+
+    <!-- Submit button -->
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="loginForm.invalid"
+    >
+      Login
+    </button>
+
+    <!-- Sign Up redirect section -->
+    <div class="signup-link">
+      <span>Don't have an account?</span>
+      <button mat-button color="accent" (click)="goToSignup()">
+        Sign Up
+      </button>
+    </div>
+  </form>
+</div>
