@@ -45,7 +45,7 @@ ng serve
 - ✅ Angular 19 Standalone Architecture (no NgModules)
 - ✅ Angular Material 3 UI Components
 - ✅ Reactive Programming with RxJS (no Promises)
-- ✅ Mock JWT-based login/signup (no real backend)
+- ✅ Mock JWT-based login/signup (no actual backend)
 - ✅ LocalStorage to track reading progress per book
 - ✅ Book reading experience with per-line highlighting
 - ✅ Category + book structure (mocked)
@@ -63,6 +63,29 @@ src/app/
 ├── app.routes.ts → standalone routing
 └── app.component.ts
 ```
+
+---
+
+## ⚙️ Challenges Faced & Solutions
+
+| Challenge | Solution |
+|----------|----------|
+| **Authentication persistence on refresh** | Used a `BehaviorSubject` in `AuthService` along with a manual check for JWT token on `AppComponent` init to ensure UI updates correctly after reload. |
+| **Template flicker with `@if` control flow** | Ensured Angular's `@if` syntax was supported (Angular 17+). Restructured templates and moved login state checks to a shared service. |
+| **Handling broken images or missing book covers** | Added error handling for `img` elements using the `onerror` event to load a default placeholder image. |
+| **Simulating backend logic like purchases** | Used `localStorage` to mimic backend logic for storing purchased books and user progress. |
+| **Ensuring logout UI reflects correctly** | Called `isLoggedIn()` method and subscribed to login state on root `AppComponent` to update navigation dynamically. |
+
+---
+
+## 📌 How I Overcame Them
+
+Most of the issues were tackled by:
+
+- 📖 Reading the Angular 19 documentation for new APIs and control flow syntax.
+- 🧪 Debugging DOM rendering behavior using Chrome DevTools.
+- ♻️ Using reactive patterns (`BehaviorSubject`) to maintain state across components.
+- 🔁 Testing refresh scenarios manually to catch UI inconsistencies.
 
 ---
 
