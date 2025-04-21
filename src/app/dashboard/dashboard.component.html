@@ -1,0 +1,83 @@
+<!-- 
+ 
+  DashboardComponent Template
+  This template displays a list of books in a grid layout.
+  Each book is represented as a Material Design card with its title, category, progress, and action buttons for purchase or reading.
+-->
+
+<div class="dashboard-container">
+  <!-- Dashboard title with an icon -->
+  <h2 class="dashboard-title">
+    <mat-icon class="icon" aria-label="book icon">menu_book</mat-icon> Welcome
+    To E-Books!
+  </h2>
+
+  <!-- Grid layout for displaying books -->
+  <div class="books-grid">
+    <!-- Loop through the list of books and display each as a card -->
+    <mat-card *ngFor="let book of books" class="book-card mat-elevation-z4">
+      <!-- Book cover image -->
+      <!-- <img
+        mat-card-image
+        [src]="book.image || 'assets/sample_book_image.jpg'"
+        (error)="book.image = 'assets/sample_book_image.jpg'"
+        alt="{{ book.title }} cover"
+      /> -->
+
+      <img
+        mat-card-image
+        [src]="book.image || 'assets/images/book_img.png'"
+        (error)="book.image = 'assets/sample_book_image.jpg'"
+        alt="{{ book.title }} cover"
+      />
+
+      <!-- Card header with book title and category -->
+      <mat-card-header>
+        <mat-card-title>{{ book.title }}</mat-card-title>
+        <mat-card-subtitle>{{ book.category }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <!-- Card content with a brief description -->
+      <mat-card-content>
+        <div class="description">
+          Explore this book to gain more insights and improve your skills.
+        </div>
+
+        <!-- Show progress if available -->
+        <div *ngIf="progress[book.id]" class="book-progress">
+          <small>
+            Line {{ progress[book.id].line + 1 }} of
+            {{ book.content.length }} ({{ getProgressPercent(book) }}%)
+          </small>
+          <mat-progress-bar
+            mode="determinate"
+            [value]="getProgressPercent(book)"
+          ></mat-progress-bar>
+        </div>
+      </mat-card-content>
+
+      <!-- Card actions with buttons for purchase or reading -->
+      <mat-card-actions align="end">
+        <!-- Purchase button -->
+        <button
+          mat-flat-button
+          color="accent"
+          *ngIf="!isPurchased(book.id)"
+          (click)="purchase(book.id)"
+        >
+          Buy: {{ book.price | currency }}
+        </button>
+
+        <!-- Read button -->
+        <button
+          mat-flat-button
+          color="primary"
+          *ngIf="isPurchased(book.id)"
+          (click)="readBook(book.id)"
+        >
+          Read Book
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

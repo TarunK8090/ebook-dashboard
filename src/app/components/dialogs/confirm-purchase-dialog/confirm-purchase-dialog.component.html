@@ -1,0 +1,42 @@
+<!-- 
+  Author: Tarun Kumar
+  Date: April 8, 2025
+  
+  Description: ConfirmPurchaseDialogComponent Template
+  This template provides a user interface for confirming a book purchase.
+  It includes states for confirmation, processing, and success, with appropriate actions for each state.
+-->
+
+<!-- Dialog Title -->
+<h2 mat-dialog-title *ngIf="!isProcessing && !success">Confirm Purchase</h2>
+
+<!-- Confirmation State -->
+<mat-dialog-content *ngIf="!isProcessing && !success">
+  <p>
+    Do you want to purchase "<strong>{{ data.bookTitle }}</strong>"?
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" *ngIf="!isProcessing && !success">
+  <!-- Cancel Button -->
+  <button mat-button (click)="dialogRef.close(false)">Cancel</button>
+
+  <!-- Confirm Button -->
+  <button mat-raised-button color="primary" (click)="processPurchase()">
+    Confirm
+  </button>
+</mat-dialog-actions>
+
+<!-- Processing State -->
+<div class="dialog-processing" *ngIf="isProcessing">
+  <mat-spinner diameter="40"></mat-spinner>
+  <p>Processing your payment...</p>
+</div>
+
+<!-- Success State -->
+<div class="dialog-success" *ngIf="success">
+  <p> Your purchase was successful!</p>
+  <button mat-raised-button color="primary" (click)="dialogRef.close(true)">
+    Continue
+  </button>
+</div>

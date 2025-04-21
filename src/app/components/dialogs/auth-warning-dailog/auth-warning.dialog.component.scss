@@ -1,0 +1,11 @@
+mat-dialog-content {
+  font-size: 1rem;
+  padding: 1rem 0;
+}
+
+mat-dialog-actions {
+  margin-top: 1rem;
+  button + button {
+    margin-left: 0.5rem;
+  }
+}

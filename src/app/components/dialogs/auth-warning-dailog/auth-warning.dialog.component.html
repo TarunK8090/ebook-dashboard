@@ -1,0 +1,24 @@
+<!-- 
+  Author: Tarun Kumar
+  Date: April 8, 2025
+
+  Description: AuthWarningDialog Template
+  This template displays a warning dialog when a user tries to access restricted content without being logged in or without purchasing the required book.
+-->
+
+<!-- Dialog Title -->
+<h2 mat-dialog-title>Access Denied</h2>
+
+<!-- Dialog Content -->
+<mat-dialog-content>
+  <p>You must be logged in and have purchased this book to continue.</p>
+</mat-dialog-content>
+
+<!-- Dialog Actions -->
+<mat-dialog-actions align="end">
+  <!-- Close Button -->
+  <button mat-button (click)="closeDialog()">Close</button>
+
+  <!-- Go to Login Button -->
+  <button mat-raised-button color="primary" (click)="goToLogin()">Go to Login</button>
+</mat-dialog-actions>
